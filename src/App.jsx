@@ -1,5 +1,5 @@
-import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar.jsx";
+import { Routes, Route, useLocation } from "react-router-dom";
+import Navbar from "./components/Navbar";
 
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
@@ -9,9 +9,13 @@ import About from "./pages/About.jsx";
 import Players from "./pages/Players.jsx";
 
 function App() {
+  const location = useLocation();
+  const hideNavbar =
+    location.pathname === "/login" || location.pathname === "/registro";
+
   return (
     <>
-      <Navbar />
+      {!hideNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
