@@ -443,6 +443,18 @@ textarea.form-input {
 
 /* JUGADORES */
 
+.players-page {
+  margin-top: 2rem;
+}
+
+.players-intro {
+  max-width: 700px;
+  margin: 0 auto 2rem auto;
+  text-align: center;
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+
 .players-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -451,33 +463,79 @@ textarea.form-input {
 
 .player-card {
   background-color: #ffffff;
-  border-radius: var(--card-radius);
+  border-radius: 16px;
   border: 1px solid var(--border);
   padding: 1.5rem 1.4rem;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
 }
 
 .player-photo {
-  width: 90px;
-  height: 90px;
-  border-radius: 999px;
-  background-color: #e0e7f5;
+  width: 100%;
+  padding-top: 70%; /* relación de aspecto */
+  border-radius: 14px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   margin-bottom: 1rem;
 }
 
+.player-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
 .player-name {
+  font-size: 1.05rem;
   font-weight: 700;
   margin-bottom: 0.25rem;
+  color: #111827;
 }
 
-.player-pos {
-  font-size: 0.9rem;
-  color: var(--muted);
-  margin-bottom: 0.75rem;
+.player-label {
+  font-weight: 600;
+  color: #111827;
 }
 
-.player-meta {
-  font-size: 0.85rem;
-  color: var(--muted);
+/* Paginación centrada PRO */
+.players-pagination {
+  margin: 30px auto 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.page-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: #ffffff;
+  border: 2px solid #d1d5db;
+  color: #374151;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.25s ease;
+}
+
+.page-btn:hover {
+  background: #f3f4f6;
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.page-btn.active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: white;
+  transform: scale(1.12);
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.4);
 }
 
 /* RESPONSIVE */

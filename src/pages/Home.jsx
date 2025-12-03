@@ -74,7 +74,10 @@ export default function Home() {
       <section className="section">
         <h2 className="section-title">Jugadores recientes</h2>
         <div className="card-grid-2">
-          <div className="placeholder-card" />
+          <div className="player-card">
+            <img src="https://images.unsplash.com/photo-1599280168763-4d06b9a7d75f" />
+            <p>Jugador destacado – Entrenando en cancha sintética</p>
+          </div>
           <div className="placeholder-card" />
         </div>
       </section>
@@ -84,11 +87,15 @@ export default function Home() {
         <div className="card-grid-2">
           <div>
             <h2 className="section-title">Cómo contactarse</h2>
-            <div className="placeholder-card" />
+            <div className="contact-preview">
+              <img src="" />
+            </div>
           </div>
           <div>
             <h2 className="section-title">Unirse</h2>
-            <div className="placeholder-card" />
+            <div className="join-card">
+              <img src="" />
+            </div>
           </div>
         </div>
       </section>
