@@ -1,152 +1,104 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Registro.css"; // si tenés un CSS separado (opcional)
 
 export default function Register() {
   const navigate = useNavigate();
+
   const [form, setForm] = useState({
     nombreCompleto: "",
     email: "",
-    password: "",
-    password2: ""
+    password: ""
   });
-  const [message, setMessage] = useState("");
 
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const [msg, setMsg] = useState("");
 
-  const togglePassword = (id) => {
-    const input = document.getElementById(id);
-    if (!input) return;
-    input.type = input.type === "password" ? "text" : "password";
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setMessage("");
 
-    if (form.password !== form.password2) {
-      setMessage("Las contraseñas no coinciden");
+    // Validación básica frontend
+    if (!form.nombreCompleto || !form.email || !form.password) {
+      setMsg("Por favor completá todos los campos.");
       return;
     }
 
-    try {
-      const res = await fetch("http://localhost:4000/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          nombreCompleto: form.nombreCompleto,
-          email: form.email,
-          password: form.password
-        })
+    fetch("http://localhost:4000/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form)
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          setMsg(data.error);
+        } else {
+          setMsg("Registro exitoso. Redirigiendo al inicio de sesión...");
+          setTimeout(() => navigate("/login"), 1500);
+        }
+      })
+      .catch(() => {
+        setMsg("Error al conectarse con el servidor.");
       });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Error al registrarse");
-
-      setMessage("Registro exitoso. Ahora puedes iniciar sesión.");
-      setTimeout(() => navigate("/"), 1500);
-      setForm({ nombreCompleto: "", email: "", password: "", password2: "" });
-    } catch (err) {
-      setMessage(err.message);
-    }
   };
 
   return (
-    <main className="main-container auth-main">
-      <section className="auth-card card" style={{ marginTop: "2rem" }}>
-        <h1 className="page-title" style={{ marginBottom: "2rem" }}>
-          Regístrate
-        </h1>
+    <main className="auth-container">
+      <h1 className="auth-title">Registrate</h1>
 
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label className="form-label" htmlFor="nombreCompleto">
-              Nombre completo
-            </label>
-            <input
-              className="form-input"
-              id="nombreCompleto"
-              name="nombreCompleto"
-              type="text"
-              value={form.nombreCompleto}
-              onChange={handleChange}
-            />
-          </div>
+      <form className="auth-form" onSubmit={handleSubmit}>
+        {/* Nombre */}
+        <label>Nombre completo</label>
+        <input
+          type="text"
+          name="nombreCompleto"
+          placeholder="Tu nombre"
+          value={form.nombreCompleto}
+          onChange={handleChange}
+        />
 
-          <div className="form-group">
-            <label className="form-label" htmlFor="email">
-              Correo electrónico
-            </label>
-            <input
-              className="form-input"
-              id="email"
-              name="email"
-              type="email"
-              value={form.email}
-              onChange={handleChange}
-            />
-          </div>
+        {/* Email */}
+        <label>Email</label>
+        <input
+          type="email"
+          name="email"
+          placeholder="tunombre@example.com"
+          value={form.email}
+          onChange={handleChange}
+        />
 
-          <div className="form-group">
-            <label className="form-label" htmlFor="password">
-              Contraseña
-            </label>
-            <div className="form-input-wrapper">
-              <input
-                className="form-input"
-                id="password"
-                name="password"
-                type="password"
-                value={form.password}
-                onChange={handleChange}
-              />
-              <span
-                className="eye-toggle"
-                onClick={() => togglePassword("password")}
-              >
-                👁
-              </span>
-            </div>
-          </div>
+        {/* Contraseña */}
+        <label>Contraseña</label>
+        <input
+          type="password"
+          name="password"
+          placeholder="*******"
+          value={form.password}
+          onChange={handleChange}
+        />
 
-          <div className="form-group">
-            <label className="form-label" htmlFor="password2">
-              Confirmar contraseña
-            </label>
-            <div className="form-input-wrapper">
-              <input
-                className="form-input"
-                id="password2"
-                name="password2"
-                type="password"
-                value={form.password2}
-                onChange={handleChange}
-              />
-              <span
-                className="eye-toggle"
-                onClick={() => togglePassword("password2")}
-              >
-                👁
-              </span>
-            </div>
-          </div>
+        {/* Botón */}
+        <button type="submit" className="auth-btn">
+          Registrate
+        </button>
+      </form>
 
-          <button className="btn-primary" type="submit">
-            Registrarse
-          </button>
-        </form>
+      {/* Mensajes */}
+      {msg && <p className="auth-msg">{msg}</p>}
 
-        {message && (
-          <p className="text-center" style={{ marginTop: "1rem", color: "#b91c1c" }}>
-            {message}
-          </p>
-        )}
-
-        <p className="text-center" style={{ marginTop: "2rem" }}>
-          <span className="text-muted">¿Ya tienes una cuenta?</span>{" "}
-          <a href="/login">Iniciar sesión</a>
-        </p>
-      </section>
+      {/* Ir a Login */}
+      <p className="auth-switch">
+        ¿Ya tenés cuenta?{" "}
+        <span onClick={() => navigate("/login")} className="link">
+          Iniciar sesión
+        </span>
+      </p>
     </main>
   );
 }
