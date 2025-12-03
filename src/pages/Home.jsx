@@ -8,14 +8,14 @@ export default function Home() {
       <section className="hero">
         <div className="hero-image" />
         <div>
-          <h1 className="hero-title">Descubre tu potencial</h1>
+          <h1 className="hero-title">Descubrí tu potencial</h1>
           <p className="hero-subtitle">
             Una plataforma para jugadores de fútbol que buscan ser vistos por reclutadores.
           </p>
           <div className="hero-actions">
             <Link to="/registro">
               <button className="btn-primary" style={{ width: "auto" }}>
-                Regístrate
+                Registrate
               </button>
             </Link>
             <button className="btn-outline">Más información</button>
@@ -56,13 +56,13 @@ export default function Home() {
             </span>
           </div>
           <div className="feature-item">
-            <span className="feature-label">Muestra tus habilidades y logros</span>
+            <span className="feature-label">Mostrá tus habilidades y logros</span>
             <span className="feature-desc">
               Sube videos, estadísticas y certificaciones deportivas.
             </span>
           </div>
           <div className="feature-item">
-            <span className="feature-label">Conéctate</span>
+            <span className="feature-label">Conectate</span>
             <span className="feature-desc">
               Con reclutadores y clubes de fútbol a través de la plataforma.
             </span>

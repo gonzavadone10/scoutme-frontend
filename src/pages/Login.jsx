@@ -93,8 +93,8 @@ export default function Login() {
         )}
 
         <p className="text-center" style={{ marginTop: "2rem" }}>
-          <span className="text-muted">¿No tienes una cuenta?</span>{" "}
-          <a href="/registro">Regístrate</a>
+          <span className="text-muted">¿No tenes una cuenta?</span>{" "}
+          <a href="/registro">Registrate</a>
         </p>
       </section>
     </main>
