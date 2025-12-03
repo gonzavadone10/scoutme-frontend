@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     nombreCompleto: "",
     email: "",
@@ -42,6 +44,7 @@ export default function Register() {
       if (!res.ok) throw new Error(data.message || "Error al registrarse");
 
       setMessage("Registro exitoso. Ahora puedes iniciar sesión.");
+      setTimeout(() => navigate("/"), 1500);
       setForm({ nombreCompleto: "", email: "", password: "", password2: "" });
     } catch (err) {
       setMessage(err.message);

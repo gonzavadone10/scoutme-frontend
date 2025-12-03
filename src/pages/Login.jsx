@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
   const [message, setMessage] = useState("");
 
@@ -28,6 +30,7 @@ export default function Login() {
       if (!res.ok) throw new Error(data.message || "Error al iniciar sesión");
 
       setMessage(`Bienvenido, ${data.user.nombreCompleto}`);
+      setTimeout(() => navigate("/"), 1500);
     } catch (err) {
       setMessage(err.message);
     }
