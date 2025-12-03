@@ -1,37 +1,50 @@
-import { Link, useLocation } from "react-router-dom";
+import React from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
-  const { pathname } = useLocation();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const isActive = (path) => (pathname === path ? "active" : "");
+  // Ocultar navbar en login y registro
+  if (location.pathname === "/login" || location.pathname === "/register") {
+    return null;
+  }
+
+  const linkClass = ({ isActive }) =>
+    isActive ? "active" : "";
 
   return (
-    <div className="navbar-wrapper">
-      <header className="navbar">
+    <header className="navbar-wrapper">
+      <nav className="navbar">
         <div className="navbar-left">
           <div className="logo-circle" />
           <span className="logo-text">SCOUTME</span>
         </div>
-        <nav className="nav-links">
-          <Link to="/" className={isActive("/")}>
+
+        <div className="nav-links">
+          <NavLink to="/" end className={linkClass}>
             Inicio
-          </Link>
-          <Link to="/jugadores" className={isActive("/jugadores")}>
+          </NavLink>
+          <NavLink to="/jugadores" className={linkClass}>
             Jugadores
-          </Link>
-          <Link to="/nosotros" className={isActive("/nosotros")}>
+          </NavLink>
+          <NavLink to="/quienes-somos" className={linkClass}>
             Quiénes Somos
-          </Link>
-          <Link to="/contacto" className={isActive("/contacto")}>
+          </NavLink>
+          <NavLink to="/contacto" className={linkClass}>
             Contacto
-          </Link>
-        </nav>
-        <div className="nav-actions">
-          <Link to="/login">
-            <button className="btn-nav-primary">Iniciar sesión</button>
-          </Link>
+          </NavLink>
         </div>
-      </header>
-    </div>
+
+        <div className="nav-actions">
+          <button
+            className="btn-nav-primary"
+            onClick={() => navigate("/login")}
+          >
+            Iniciar sesión
+          </button>
+        </div>
+      </nav>
+    </header>
   );
 }

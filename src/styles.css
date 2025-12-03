@@ -569,6 +569,8 @@ textarea.form-input {
   box-shadow: 0 6px 14px rgba(37, 99, 235, 0.4);
 }
 
+
+
 /* RESPONSIVE */
 
 @media (max-width: 900px) {
@@ -605,4 +607,27 @@ textarea.form-input {
   .page-title {
     font-size: 2rem;
   }
+}
+
+.hero-actions .btn-primary,
+.hero-actions .btn-outline {
+  width: auto;
+}
+
+.recent-photo-card {
+  min-height: 380px !important;   /* más alta */
+  border-radius: 12px;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat;
+}
+
+.contact-card,
+.join-card {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  color: #4a5568;
+  font-size: 0.95rem;
 }
