@@ -469,14 +469,45 @@ textarea.form-input {
   box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
 }
 
-.player-photo {
-  width: 100%;
-  padding-top: 70%; /* relación de aspecto */
-  border-radius: 14px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin-bottom: 1rem;
+.player-card.no-photo {
+  padding: 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.player-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.player-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.player-pos {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.player-card.no-photo p {
+  margin-top: 0.1rem;
+  line-height: 1.4;
 }
 
 .player-info {

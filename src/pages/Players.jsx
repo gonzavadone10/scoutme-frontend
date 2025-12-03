@@ -7,24 +7,18 @@ const jugadoresPorPagina = {
       posicion: "Extremo derecho",
       caracteristicas: "Rápido, desequilibrante, buen uno contra uno",
       estado: "Excelente estado físico",
-      imagen:
-        "https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg?auto=compress&cs=tinysrgb&w=800",
     },
     {
       nombre: "Franco Pérez",
       posicion: "Volante central",
       caracteristicas: "Buena visión de juego, distribuidor, orden táctico",
       estado: "Muy buen estado físico",
-      imagen:
-        "https://images.pexels.com/photos/399187/pexels-photo-399187.jpeg?auto=compress&cs=tinysrgb&w=800",
     },
     {
       nombre: "Lucas Torres",
       posicion: "Defensor central",
       caracteristicas: "Fuerte en el mano a mano, juego aéreo sólido",
       estado: "Óptimo, sin lesiones recientes",
-      imagen:
-        "https://images.pexels.com/photos/1142965/pexels-photo-1142965.jpeg?auto=compress&cs=tinysrgb&w=800",
     },
   ],
   2: [
@@ -33,24 +27,18 @@ const jugadoresPorPagina = {
       posicion: "Lateral izquierdo",
       caracteristicas: "Intenso, buena proyección en ataque",
       estado: "Excelente, resistencia alta",
-      imagen:
-        "https://images.pexels.com/photos/257970/pexels-photo-257970.jpeg?auto=compress&cs=tinysrgb&w=800",
     },
     {
       nombre: "Agustín López",
       posicion: "Enganche",
       caracteristicas: "Creativo, buen pase filtrado y media distancia",
       estado: "Muy buen estado, en ritmo de competencia",
-      imagen:
-        "https://images.pexels.com/photos/159515/soccer-football-ball-goal-159515.jpeg?auto=compress&cs=tinysrgb&w=800",
     },
     {
       nombre: "Santiago Ríos",
       posicion: "Delantero centro",
       caracteristicas: "Definidor, buena ubicación en el área",
       estado: "Óptimo, rinde los 90 minutos",
-      imagen:
-        "https://images.pexels.com/photos/3991873/pexels-photo-3991873.jpeg?auto=compress&cs=tinysrgb&w=800",
     },
   ],
   3: [
@@ -59,24 +47,18 @@ const jugadoresPorPagina = {
       posicion: "Arquero",
       caracteristicas: "Reflejos rápidos, seguro en centros",
       estado: "Excelente, sin antecedentes de lesiones graves",
-      imagen:
-        "https://images.pexels.com/photos/3991870/pexels-photo-3991870.jpeg?auto=compress&cs=tinysrgb&w=800",
     },
     {
       nombre: "Nicolás Funes",
       posicion: "Volante mixto",
       caracteristicas: "Buen ida y vuelta, llegada al área",
       estado: "Muy buen estado físico",
-      imagen:
-        "https://images.pexels.com/photos/3991874/pexels-photo-3991874.jpeg?auto=compress&cs=tinysrgb&w=800",
     },
     {
       nombre: "Ezequiel Acosta",
       posicion: "Segundo delantero",
       caracteristicas: "Movilidad, asociaciones cortas, presión alta",
       estado: "Óptimo, preparado para alta intensidad",
-      imagen:
-        "https://images.pexels.com/photos/3991878/pexels-photo-3991878.jpeg?auto=compress&cs=tinysrgb&w=800",
     },
   ],
 };
@@ -96,17 +78,16 @@ export default function Players() {
 
       <div className="players-grid">
         {lista.map((jugador, index) => (
-          <article className="player-card" key={index}>
-            <div
-              className="player-photo"
-              style={{ backgroundImage: `url(${jugador.imagen})` }}
-            />
+          <article className="player-card no-photo" key={index}>
+            <div className="player-header">
+              <div className="player-icon">⚽</div>
+              <div>
+                <h3 className="player-name">{jugador.nombre}</h3>
+                <p className="player-pos">{jugador.posicion}</p>
+              </div>
+            </div>
+
             <div className="player-info">
-              <h3 className="player-name">{jugador.nombre}</h3>
-              <p>
-                <span className="player-label">Posición:</span>{" "}
-                {jugador.posicion}
-              </p>
               <p>
                 <span className="player-label">Características:</span>{" "}
                 {jugador.caracteristicas}
