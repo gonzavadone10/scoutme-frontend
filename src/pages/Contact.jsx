@@ -1,127 +1,72 @@
-import React, { useState } from "react";
+import React from "react";
 
 export default function Contact() {
-  const [form, setForm] = useState({
-    nombre: "",
-    email: "",
-    asunto: "",
-    mensaje: ""
-  });
-  const [message, setMessage] = useState("");
-
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setMessage("");
-
-    try {
-      const res = await fetch("http://localhost:4000/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form)
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Error al enviar");
-
-      setMessage("Mensaje enviado correctamente.");
-      setForm({ nombre: "", email: "", asunto: "", mensaje: "" });
-    } catch (err) {
-      setMessage(err.message);
-    }
-  };
-
   return (
     <main className="main-container">
-      <section className="card">
-        <h1 className="page-title" style={{ marginBottom: "2.5rem" }}>
-          Contacto
-        </h1>
+      <h1 className="page-title">Contacto</h1>
 
-        <div className="contact-layout">
-          <form onSubmit={handleSubmit}>
+      <section className="contact-layout">
+        {/* Formulario */}
+        <div className="card">
+          <form>
             <div className="form-group">
-              <label className="form-label" htmlFor="nombre">
-                Nombre
-              </label>
-              <input
-                className="form-input"
-                id="nombre"
-                name="nombre"
-                type="text"
-                value={form.nombre}
-                onChange={handleChange}
-              />
+              <label className="form-label">Nombre</label>
+              <input className="form-input" type="text" />
             </div>
+
             <div className="form-group">
-              <label className="form-label" htmlFor="email">
-                Correo electrónico
-              </label>
-              <input
-                className="form-input"
-                id="email"
-                name="email"
-                type="email"
-                value={form.email}
-                onChange={handleChange}
-              />
+              <label className="form-label">Correo electrónico</label>
+              <input className="form-input" type="email" />
             </div>
+
             <div className="form-group">
-              <label className="form-label" htmlFor="asunto">
-                Asunto
-              </label>
-              <input
-                className="form-input"
-                id="asunto"
-                name="asunto"
-                type="text"
-                value={form.asunto}
-                onChange={handleChange}
-              />
+              <label className="form-label">Asunto</label>
+              <input className="form-input" type="text" />
             </div>
+
             <div className="form-group">
-              <label className="form-label" htmlFor="mensaje">
-                Mensaje
-              </label>
-              <textarea
-                className="form-input"
-                id="mensaje"
-                name="mensaje"
-                value={form.mensaje}
-                onChange={handleChange}
-              />
+              <label className="form-label">Mensaje</label>
+              <textarea className="form-input" />
             </div>
-            <button className="btn-primary" type="submit">
+
+            <button type="submit" className="btn-primary">
               Enviar
             </button>
-
-            {message && (
-              <p style={{ marginTop: "1rem", color: "#0f766e" }}>{message}</p>
-            )}
           </form>
+        </div>
 
-          <aside className="contact-info-block">
-            <h2 className="section-title" style={{ marginBottom: "1rem" }}>
-              Información de Contacto
-            </h2>
+        {/* Información de contacto + mapa */}
+        <div className="card contact-info-block">
+          <h2 className="section-title">Información de Contacto</h2>
 
-            <div className="contact-item">
-              <span className="contact-icon">📍</span>
-              <span>Dirección 123, Ciudad, País</span>
-            </div>
-            <div className="contact-item">
-              <span className="contact-icon">✉️</span>
-              <span>info@scoutme.org</span>
-            </div>
-            <div className="contact-item">
-              <span className="contact-icon">☎️</span>
-              <span>+34 000 000 000</span>
-            </div>
+          <div className="contact-item">
+            <span className="contact-icon">📍</span>
+            <span>Dirección: Av. Santa Fe 1452, CABA</span>
+          </div>
 
-            <div className="contact-map" />
-          </aside>
+          <div className="contact-item">
+            <span className="contact-icon">✉️</span>
+            <span>Email: contacto@scoutme.com</span>
+          </div>
+
+          <div className="contact-item">
+            <span className="contact-icon">📞</span>
+            <span>Teléfono: +54 11 4523-8871</span>
+          </div>
+
+          <div className="contact-item">
+            <span className="contact-icon">⏰</span>
+            <span>Horarios: Lunes a viernes de 9 a 18 hs</span>
+          </div>
+
+          <div className="contact-map">
+            <iframe
+              title="Mapa ScoutMe"
+              src="https://www.google.com/maps?q=Av.+Santa+Fe+1452,+CABA&output=embed"
+              loading="lazy"
+              allowFullScreen
+            ></iframe>
+          </div>
         </div>
       </section>
     </main>
