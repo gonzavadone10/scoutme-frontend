@@ -1,101 +1,117 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../services/api";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ email: "", password: "" });
-  const [message, setMessage] = useState("");
 
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
 
-  const togglePassword = () => {
-    const input = document.getElementById("loginPassword");
-    if (!input) return;
-    input.type = input.type === "password" ? "text" : "password";
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const goByRole = (role) => {
+    if (role === "Jugador") navigate("/dashboard-jugador");
+    else if (role === "Entrenador") navigate("/dashboard-entrenador");
+    else if (role === "Scout") navigate("/dashboard-scout");
+    else if (role === "Admin") navigate("/dashboard-admin");
+    else navigate("/");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage("");
+    setError("");
 
     try {
-      const res = await fetch("http://localhost:4000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form)
-      });
+      const data = await loginUser(form);
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Error al iniciar sesión");
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
 
-      setMessage(`Bienvenido, ${data.user.nombreCompleto}`);
-      setTimeout(() => navigate("/"), 1500);
+      goByRole(data.user.role);
     } catch (err) {
-      setMessage(err.message);
+      setError(err.message);
     }
   };
 
   return (
-    <main className="main-container auth-main">
-      <section className="auth-card card" style={{ marginTop: "2rem" }}>
-        <h1 className="page-title" style={{ marginBottom: "2rem" }}>
-          Iniciar Sesión
-        </h1>
+    <main className="auth-page">
+      <section className="auth-main">
+        <div className="auth-card auth-card--login">
+          <h1 className="page-title login-title">Iniciar Sesión</h1>
 
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label className="form-label" htmlFor="email">
-              Correo electrónico
-            </label>
-            <input
-              className="form-input"
-              id="email"
-              name="email"
-              type="email"
-              value={form.email}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="form-label" htmlFor="loginPassword">
-              Contraseña
-            </label>
-            <div className="form-input-wrapper">
-              <input
-                className="form-input"
-                id="loginPassword"
-                name="password"
-                type="password"
-                value={form.password}
-                onChange={handleChange}
-              />
-              <span className="eye-toggle" onClick={togglePassword}>
-                👁
-              </span>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label className="form-label">Correo electrónico</label>
+              <div className="form-input-wrapper">
+                <input
+                  type="email"
+                  name="email"
+                  className="form-input"
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder="Ingresá tu correo"
+                  required
+                />
+              </div>
             </div>
-          </div>
 
-          <p className="text-center" style={{ marginBottom: "1.5rem" }}>
-            <a href="#">¿Olvidaste tu contraseña?</a>
-          </p>
+            <div className="form-group">
+              <label className="form-label">Contraseña</label>
+              <div className="form-input-wrapper">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  className="form-input"
+                  value={form.password}
+                  onChange={handleChange}
+                  placeholder="Ingresá tu contraseña"
+                  required
+                />
+                <span
+                  className="eye-toggle"
+                  onClick={() => setShowPassword(!showPassword)}
+                  title={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                >
+                  {showPassword ? "🙈" : "👁️"}
+                </span>
+              </div>
+            </div>
 
-          <button className="btn-primary" type="submit">
-            Iniciar Sesión
-          </button>
-        </form>
+            <div className="login-extra">
+              <button
+                type="button"
+                className="forgot-link"
+                onClick={() => alert("Funcionalidad futura")}
+              >
+                ¿Olvidaste tu contraseña?
+              </button>
+            </div>
 
-        {message && (
-          <p className="text-center" style={{ marginTop: "1rem", color: "#0f766e" }}>
-            {message}
-          </p>
-        )}
+            {error && <p className="login-error">{error}</p>}
 
-        <p className="text-center" style={{ marginTop: "2rem" }}>
-          <span className="text-muted">¿No tenes una cuenta?</span>{" "}
-          <a href="/registro">Registrate</a>
-        </p>
+            <button type="submit" className="btn-primary login-btn">
+              Iniciar Sesión
+            </button>
+
+            <p className="login-register-text">
+              ¿No tenés una cuenta?{" "}
+              <Link to="/register" className="login-register-link">
+                Registrate
+              </Link>
+            </p>
+          </form>
+        </div>
       </section>
     </main>
   );

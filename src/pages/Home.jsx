@@ -37,11 +37,11 @@ export default function Home() {
 
             {/* Botón de arriba: ir a Quiénes Somos / About */}
             <button
-  className="btn-outline"
-  onClick={() => navigate("/quienes-somos")}
->
-  Más información
-</button>
+              className="btn-outline"
+              onClick={() => navigate("/quienes-somos")}
+            >
+              Más información
+            </button>
           </div>
         </div>
       </section>
@@ -83,21 +83,21 @@ export default function Home() {
 
         <div className="feature-list">
           <div className="feature-item">
-            <span className="feature-label">Buscá y filtra</span>
+            <span className="feature-label">Buscá y filtrá:</span>
             <span className="feature-desc">
               Jugadores de talento por posición, edad y ubicación.
             </span>
           </div>
 
           <div className="feature-item">
-            <span className="feature-label">Mostrá tus habilidades y logros</span>
+            <span className="feature-label">Mostrá tus habilidades y logros:</span>
             <span className="feature-desc">
               Subí videos, estadísticas y certificaciones deportivas.
             </span>
           </div>
 
           <div className="feature-item">
-            <span className="feature-label">Conectate</span>
+            <span className="feature-label">Conectate:</span>
             <span className="feature-desc">
               Con reclutadores y clubes de fútbol a través de la plataforma.
             </span>
@@ -166,3 +166,88 @@ export default function Home() {
     </main>
   );
 }
+
+const styles = {
+  container: {
+    paddingTop: "140px",
+    paddingLeft: "60px",
+    paddingRight: "60px",
+  },
+
+  hero: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    alignItems: "center",
+    gap: "40px",
+    marginBottom: "80px",
+  },
+
+  title: {
+    fontSize: "48px",
+    color: "#ffffff",
+    margin: 0,
+  },
+
+  subtitle: {
+    fontSize: "18px",
+    marginTop: "20px",
+    color: "rgba(255,255,255,0.85)",
+    lineHeight: "1.6",
+  },
+
+  buttons: {
+    marginTop: "30px",
+    display: "flex",
+    gap: "16px",
+  },
+
+  primaryBtn: {
+    background: "linear-gradient(135deg, #0b4ea2 0%, #1694ff 100%)",
+    color: "#fff",
+    border: "none",
+    padding: "12px 20px",
+    borderRadius: "10px",
+    cursor: "pointer",
+    fontWeight: "bold",
+    boxShadow: "0 8px 20px rgba(0,0,0,0.3)",
+  },
+
+  secondaryBtn: {
+    background: "#ffffff",
+    color: "#0b4ea2",
+    border: "none",
+    padding: "12px 20px",
+    borderRadius: "10px",
+    cursor: "pointer",
+    fontWeight: "bold",
+  },
+
+  section: {
+    marginTop: "60px",
+  },
+
+  sectionTitle: {
+    fontSize: "32px",
+    color: "#ffffff",
+    marginBottom: "30px",
+  },
+
+  sectionContent: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "40px",
+    alignItems: "center",
+  },
+
+  text: {
+    color: "rgba(255,255,255,0.85)",
+    lineHeight: "1.8",
+    marginBottom: "20px",
+  },
+
+  image: {
+    width: "100%",
+    borderRadius: "16px",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
+  },
+};

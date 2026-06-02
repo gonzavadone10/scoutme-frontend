@@ -8,10 +8,18 @@ import About from "./pages/About.jsx";
 import Contact from "./pages/Contact.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import PlayerProfile from "./pages/PlayerProfile";
+import ComparePlayers from "./pages/ComparePlayers";
 
 export default function App() {
   return (
-    <>
+    <div
+        style={{
+          minHeight: "100vh",
+          background:
+            "linear-gradient(135deg, #071a2d 0%, #0b4ea2 45%, #1694ff 100%)",
+        }}
+      >
       {/* Navbar visible en todas menos login/registro (lo manejamos en Navbar) */}
       <Navbar />
 
@@ -24,7 +32,9 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         {/* si escriben cualquier cosa, los mando a inicio */}
         <Route path="*" element={<Home />} />
+        <Route path="/jugadores/:id" element={<PlayerProfile />} />
+        <Route path="/compare" element={<ComparePlayers />} />
       </Routes>
-    </>
+    </div>
   );
 }
