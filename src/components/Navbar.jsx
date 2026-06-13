@@ -25,12 +25,23 @@ export default function Navbar() {
           <NavLink to="/" end className={linkClass}>
             Inicio
           </NavLink>
+
           <NavLink to="/jugadores" className={linkClass}>
             Jugadores
           </NavLink>
+
+          <NavLink to="/mi-perfil" className={linkClass}>
+            Mi Perfil
+          </NavLink>
+
+          <NavLink to="/estadisticas" className={linkClass}>
+            Estadísticas
+          </NavLink>
+
           <NavLink to="/quienes-somos" className={linkClass}>
             Quiénes Somos
           </NavLink>
+
           <NavLink to="/contacto" className={linkClass}>
             Contacto
           </NavLink>

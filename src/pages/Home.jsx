@@ -102,6 +102,13 @@ export default function Home() {
               Con reclutadores y clubes de fútbol a través de la plataforma.
             </span>
           </div>
+
+          <div className="feature-item">
+            <span className="feature-label">Compará jugadores:</span>
+            <span className="feature-desc">
+              Analizá estadísticas y rendimiento entre dos perfiles deportivos para facilitar la toma de decisiones.
+            </span>
+          </div>
         </div>
       </section>
 

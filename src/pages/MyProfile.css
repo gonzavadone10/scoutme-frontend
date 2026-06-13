@@ -1,0 +1,67 @@
+.profile-container {
+  width: min(900px, 92%);
+  margin: 0 auto;
+  padding: 120px 0 70px;
+  color: white;
+}
+
+.profile-container h1 {
+  font-size: 42px;
+  margin-bottom: 26px;
+}
+
+.profile-card,
+.profile-empty-card {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 24px;
+  padding: 32px;
+}
+
+.profile-avatar {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: #1694ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-weight: 900;
+  margin-bottom: 18px;
+}
+
+.profile-card h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.profile-card p,
+.profile-empty-card p {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 14px 16px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+}
+
+.profile-button {
+  display: inline-block;
+  margin-top: 18px;
+  background: #1694ff;
+  color: white;
+  text-decoration: none;
+  padding: 14px 24px;
+  border-radius: 14px;
+  font-weight: 800;
+}
+
+.profile-delete-button {
+  margin-left: 12px;
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
