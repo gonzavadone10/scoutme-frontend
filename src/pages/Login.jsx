@@ -35,10 +35,16 @@ export default function Login() {
     try {
       const data = await loginUser(form);
 
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          nombre: data.user.nombreCompleto,
+          email: data.user.email,
+          role: "Jugador",
+        })
+      );
 
-      goByRole(data.user.role);
+      navigate("/");
     } catch (err) {
       setError(err.message);
     }

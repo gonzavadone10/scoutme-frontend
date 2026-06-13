@@ -5,13 +5,20 @@ export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const cerrarSesion = () => {
+    localStorage.removeItem("user");
+    navigate("/");
+    window.location.reload();
+  };
+
   // Ocultar navbar en login y registro
   if (location.pathname === "/login" || location.pathname === "/register") {
     return null;
   }
 
-  const linkClass = ({ isActive }) =>
-    isActive ? "active" : "";
+  const linkClass = ({ isActive }) => (isActive ? "active" : "");
 
   return (
     <header className="navbar-wrapper">
@@ -34,7 +41,7 @@ export default function Navbar() {
             Mi Perfil
           </NavLink>
 
-          <NavLink to="/estadisticas" className={linkClass}>
+          <NavLink to="/stats" className={linkClass}>
             Estadísticas
           </NavLink>
 
@@ -47,13 +54,40 @@ export default function Navbar() {
           </NavLink>
         </div>
 
-        <div className="nav-actions">
-          <button
-            className="btn-nav-primary"
-            onClick={() => navigate("/login")}
-          >
-            Iniciar sesión
-          </button>
+        <div
+          className="nav-actions"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+          }}
+        >
+          {user ? (
+            <>
+              <span
+                style={{
+                  fontWeight: "600",
+                  color: "#071a2d",
+                }}
+              >
+                👤 {user.nombre || user.name}
+              </span>
+
+              <button
+                className="btn-nav-primary"
+                onClick={cerrarSesion}
+              >
+                Cerrar sesión
+              </button>
+            </>
+          ) : (
+            <button
+              className="btn-nav-primary"
+              onClick={() => navigate("/login")}
+            >
+              Iniciar sesión
+            </button>
+          )}
         </div>
       </nav>
     </header>

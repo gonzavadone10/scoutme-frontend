@@ -28,9 +28,23 @@ const Register = () => {
     setSuccess("");
 
     try {
-      await registerUser(form);
+      await registerUser({
+        nombreCompleto: form.name,
+        email: form.email,
+        password: form.password,
+      });
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          nombre: form.name,
+          email: form.email,
+          role: form.role,
+        })
+      );
+
       setSuccess("Usuario registrado correctamente");
-      setTimeout(() => navigate("/login"), 1200);
+
+      setTimeout(() => navigate("/"), 1200);
     } catch (err) {
       setError(err.message);
     }
